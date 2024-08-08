@@ -8,7 +8,7 @@ class StartManager:
     def __init__(self):
         self.welcome_text = "Hi And Welcome {}"
 
-    def start_manager(self, msg: Message, bot: TeleBot) -> Message:
+    def start(self, msg: Message, bot: TeleBot) -> Message:
         if not users_col.find_one({'user_id': msg.from_user.id}):
             context = {
                 "user_id": msg.from_user.id,
