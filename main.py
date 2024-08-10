@@ -3,7 +3,7 @@ import os
 
 import telebot
 
-from bot.managers.main.start_manager import StartManager
+from bot.managers.main.start import StartManager
 from bot.managers.group.welcome import Welcome
 from bot.managers.main.message import MessageHandler
 from dotenv import load_dotenv
@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 
 # config
 load_dotenv()
-bot = telebot.TeleBot(token=os.getenv('bot_token'), disable_web_page_preview=True)
+bot = telebot.TeleBot(token=os.getenv('BOT_TOKEN'), disable_web_page_preview=True)
 telebot.apihelper.API_URL = "http://localhost:8081/bot{0}/{1}"
 # managers
 bot.register_message_handler(StartManager().start, commands=['start'], pass_bot=True)
