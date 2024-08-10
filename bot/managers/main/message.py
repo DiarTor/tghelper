@@ -1,4 +1,4 @@
-from bot.common.user_info import is_user_in_channel
+from bot.common.user_manager import is_user_in_channel
 import telebot
 from bot.common.buttons import ButtonGenerator
 

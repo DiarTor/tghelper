@@ -8,3 +8,4 @@ db = client['tghelper']
 
 # collections
 users_col = db['users']
+settings_col = db['settings']

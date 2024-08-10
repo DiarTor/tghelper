@@ -1,6 +1,6 @@
 import telebot
 from jdatetime import datetime
-from bot.config.tokens import channels_id
+from bot.config.settings import channels_id
 
 
 class Welcome:

@@ -1,5 +1,6 @@
 from telebot.types import KeyboardButton, ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton
-from bot.config.tokens import channels_username
+from bot.config.settings import channels_username
+from bot.common.fetch_data import get_settings_data
 
 
 class ButtonGenerator:
@@ -32,5 +33,6 @@ class ButtonGenerator:
         return markup
 
     def join_channels(self):
-        buttons = [[InlineKeyboardButton(text=channel, url=f"https://t.me/{channel}")] for channel in channels_username]
+        buttons = [[InlineKeyboardButton(text=channel, url=f"https://t.me/{channel}")] for channel in
+                   get_settings_data("channels_username")]
         return self.create_inline_keyboard(buttons)
