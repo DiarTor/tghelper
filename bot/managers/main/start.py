@@ -1,10 +1,12 @@
 import telebot.types
+from jdatetime import datetime
 from telebot import TeleBot
 from telebot.types import Message
-from jdatetime import datetime
-from bot.config.database import users_col
+
+from bot.common.fetch_data import get_response_text
 from bot.common.user_manager import is_private_chat
-from bot.common.fetch_text import get_response_text
+from bot.config.database import users_col
+
 
 class StartManager:
     @staticmethod
@@ -24,5 +26,6 @@ class StartManager:
             if not users_col.find_one({'user_id': msg.from_user.id}):
                 self.insert_user_data(msg)
             return bot.send_message(chat_id=msg.chat.id,
-                                    text=get_response_text("welcome.pv", msg.from_user.first_name, msg.from_user.id, msg.chat.title),
+                                    text=get_response_text("welcome.pv", msg.from_user.first_name, msg.from_user.id,
+                                                           msg.chat.title),
                                     parse_mode='MarkDown')
