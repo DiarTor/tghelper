@@ -1,6 +1,6 @@
 from bot.config.database import settings_col
 
-#default settings
+# default settings
 channels_id = ['-1001594818741']
 channels_username = ['DiarDev']
 
