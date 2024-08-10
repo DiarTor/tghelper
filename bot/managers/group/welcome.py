@@ -5,7 +5,7 @@ from bot.config.settings import channels_id
 
 class Welcome:
     def __init__(self):
-        self.welcome_message = "Welcome back [{}](tg://user?id={}) ! ⏳{}"
+        self.welcome_message = "Welcome [{}](tg://user?id={}) ! ⏳{}"
 
     def welcome_new_members(self, msg: telebot.types.Message, bot: telebot.TeleBot) -> telebot.types.Message:
         current_time = datetime.now().strftime("%Y/%M/%d - %H:%m:%S")
