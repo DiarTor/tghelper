@@ -32,6 +32,9 @@ class ButtonGenerator:
             markup.row(*row)
         return markup
 
+    def admin_panel(self):
+        pass
+
     def join_channels(self):
         buttons = [[InlineKeyboardButton(text=channel, url=f"https://t.me/{channel}")] for channel in
                    get_settings_data("channels_username")]

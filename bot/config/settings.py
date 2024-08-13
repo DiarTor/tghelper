@@ -1,14 +1,15 @@
 from bot.config.database import settings_col
-
+from bson import ObjectId
 # change the default settings as you need.
 
 if __name__ == "__main__":
     context = {
+        "admins": [1154909190],
         "channels_id": [-1001594818741],
         "channels_username": ['DiarDev'],
         "group_id": -1002200684633,
         "group_username": "DiarDevGp",
-        "force_join": False,
+        "force_join": True,
         "welcome": True,
         "force_add": False,
         "lock_hashtag": False,
@@ -31,6 +32,9 @@ if __name__ == "__main__":
         "lock_video_note": True,
         "lock_audio": False,
         "lock_voice": False,
-
     }
-    settings_col.insert_one(context)
+    if settings_col.find_one():
+        result = settings_col.replace_one({'_id': ObjectId("66bb7b311dc3f98161079777")}, context)
+        print(f"Matched Results: {result.matched_count} | Modified Results: {result.modified_count}")
+    else:
+        settings_col.insert_one(context)
