@@ -6,6 +6,8 @@ def get_settings_data(name: str, type: str = "list"):
     try:
         settings_cursor = settings_col.find()
         fields = []
+        if type == "bool":
+            return [i.get(name)for i in settings_cursor].pop()
         for settings_doc in settings_cursor:
             fields += settings_doc.get(name, [])
         if type == "list":
@@ -18,9 +20,9 @@ def get_settings_data(name: str, type: str = "list"):
         print(e)
 
 
-def get_response_text(text: str, *args):
+def get_response_text(address: str, *args):
     # Split the text on '.' to access nested dictionary
-    keys = text.split('.')
+    keys = address.split('.')
     data = farsi.farsi
 
     # Traverse the dictionary based on keys

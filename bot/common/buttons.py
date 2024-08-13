@@ -1,5 +1,5 @@
-from telebot.types import KeyboardButton, ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton
-from bot.config.settings import channels_username
+from telebot.types import ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton
+
 from bot.common.fetch_data import get_settings_data
 
 
