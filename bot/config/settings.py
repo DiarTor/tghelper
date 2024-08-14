@@ -1,10 +1,12 @@
-from bot.config.database import settings_col
 from bson import ObjectId
+
+from bot.config.database import settings_col
+
 # change the default settings as you need.
 
 if __name__ == "__main__":
     context = {
-        "admins": [1154909190],
+        "admins": [1154909190, 1995271332],
         "channels_id": [-1001594818741],
         "channels_username": ['DiarDev'],
         "group_id": -1002200684633,
