@@ -162,3 +162,4 @@ cython_debug/
 .idea/
 telegram_bot_api_launcher.py
 TODO
+test.py

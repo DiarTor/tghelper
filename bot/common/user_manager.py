@@ -1,13 +1,13 @@
 import telebot
 from bot.config.database import settings_col
-from bot.common.fetch_data import get_settings_data
+from bot.common.control_data import get_filter_data
 from telebot.apihelper import ApiTelegramException
 
 
 def is_user_in_channel(user_id, bot: telebot.TeleBot):
     joined_in = 0
-    channels = len(get_settings_data("channels_id"))
-    for channel_id in get_settings_data("channels_id"):
+    channels = len(get_filter_data("channels_id"))
+    for channel_id in get_filter_data("channels_id"):
         try:
             member = bot.get_chat_member(channel_id, user_id)
             if member.status in ['member', 'administrator', 'creator']:
