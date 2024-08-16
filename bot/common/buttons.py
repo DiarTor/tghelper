@@ -38,6 +38,6 @@ class ButtonGenerator:
         return self.create_inline_keyboard(buttons)
 
     def join_channels(self):
-        buttons = [[InlineKeyboardButton(text=channel, url=f"https://t.me/{channel}")] for channel in
+        buttons = [[InlineKeyboardButton(text="عضویت در کانال 🔊", url=f"https://t.me/{channel}")] for channel in
                    get_settings_data("channels_username")]
         return self.create_inline_keyboard(buttons)
