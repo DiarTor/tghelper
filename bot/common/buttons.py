@@ -33,7 +33,9 @@ class ButtonGenerator:
         return markup
 
     def admin_panel(self):
-        pass
+        buttons = [[InlineKeyboardButton(text='عضویت اجباری', callback_data='force_join'),
+                    InlineKeyboardButton(text='خوش آمد گو', callback_data="welcome")]]
+        return self.create_inline_keyboard(buttons)
 
     def join_channels(self):
         buttons = [[InlineKeyboardButton(text=channel, url=f"https://t.me/{channel}")] for channel in

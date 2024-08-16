@@ -7,14 +7,18 @@ def get_settings_data(name: str, type: str = "list"):
         settings_cursor = settings_col.find()
         fields = []
         if type == "bool":
-            return [i.get(name)for i in settings_cursor].pop()
-        for settings_doc in settings_cursor:
-            fields += settings_doc.get(name, [])
+            return [i.get(name) for i in settings_cursor].pop()
         if type == "list":
+            for settings_doc in settings_cursor:
+                fields += settings_doc.get(name, [])
             return fields
         elif type == "str":
+            for settings_doc in settings_cursor:
+                fields += settings_doc.get(name, [])
             return str(''.join(map(str, fields)))
         elif type == "int":
+            for settings_doc in settings_cursor:
+                fields += settings_doc.get(name, [])
             return int(''.join(map(str, fields)))
     except ValueError as e:
         print(e)
