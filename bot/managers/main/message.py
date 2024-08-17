@@ -20,5 +20,9 @@ class MessageHandler:
     @staticmethod
     def handle_callback(callback: telebot.types.CallbackQuery, bot: telebot.TeleBot):
         data = callback.data
-        if data in list(get_all_toggle_settings()):
-            toggle_settings_data(data)
+        toggle_settings = list(get_all_toggle_settings())
+        if data in toggle_settings:
+            res = toggle_settings_data(data)
+            text = "status.message.active" if res else "status.message.deactivate"
+            text = get_response_text(text)
+            bot.answer_callback_query(callback.id, text, show_alert=True)

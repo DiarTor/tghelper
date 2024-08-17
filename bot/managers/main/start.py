@@ -6,7 +6,7 @@ from telebot.types import Message
 from bot.common.buttons import ButtonGenerator
 from bot.common.control_data import get_response_text, get_settings_data
 from bot.common.user_manager import is_private_chat
-from bot.config.database import users_col, settings_col
+from bot.config.database import users_col
 
 
 class StartManager:
@@ -30,7 +30,7 @@ class StartManager:
                 return bot.send_message(chat_id=msg.chat.id,
                                         text=get_response_text("welcome.admin", msg.from_user.first_name,
                                                                msg.from_user.id),
-                                        reply_markup=ButtonGenerator().admin_panel(), parse_mode="MarkDown")
+                                        reply_markup=ButtonGenerator().admin_panel(), parse_mode="markdown")
             return bot.send_message(chat_id=msg.chat.id,
                                     text=get_response_text("welcome.pv", msg.from_user.first_name, msg.from_user.id,
                                                            msg.chat.title),

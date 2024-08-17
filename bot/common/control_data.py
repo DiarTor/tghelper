@@ -39,6 +39,19 @@ def get_response_text(address: str, *args):
     return None
 
 
+def get_dict(address: str) -> dict:
+    """
+    Retrieves the dict from the given address
+    :param address: The Address of the dict seperated by dots(.)
+    :return: Dict
+    """
+    keys = address.split('.')
+    data = farsi.farsi
+    for key in keys:
+        data = data.get(key)
+    return data
+
+
 def get_all_toggle_settings() -> dict | None:
     """
     Retrieves the toggle settings document from the MongoDB collection.

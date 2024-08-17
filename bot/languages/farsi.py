@@ -21,5 +21,46 @@ farsi = {
            سلام ادمین [{}](tg://user?id={}) چه کاری از دستم برمیاد؟
 برای تنظیم ربات میتونید از دکمه های زیر استفاده کنید.
             """
-    }
+    },
+    "status":
+        {
+            "message": {
+                "active": "با موفقیت *فعال* شد ✅",
+                "deactivate": "با موفقیت *غیر فعال* شد ✅"
+            },
+            "alert":
+                {
+                    "active": "*فعال* ✅",
+                    "deactivate": "*غیر فعال* ❌"
+                }
+        },
+    "translations":
+        {
+            "toggle":
+                {
+                    'force_join': 'عضویت اجباری',
+                    'welcome': 'خوش آمد گو',
+                    'force_add': 'اد اجباری',
+                    'lock_hashtag': 'قفل هشتگ',
+                    'lock_username': 'قفل یوزرنیم',
+                    'lock_link': 'قفل لینک',
+                    'lock_tg_service': 'قفل سرویس تلگرام',
+                    'lock_caption': 'قفل متن عکس',
+                    'lock_inline': 'قفل دکمه شیشه ای',
+                    'lock_bot': 'قفل بات',
+                    'lock_picture': 'قفل عکس',
+                    'lock_forward': 'قفل فوروارد',
+                    'lock_gif': 'قفل گیف',
+                    'lock_sticker': 'قفل استیکر',
+                    'lock_file': 'قفل فایل',
+                    'lock_contact': 'قفل مخاطب',
+                    'lock_location': 'قفل مکان',
+                    'lock_command': 'قفل دستور',
+                    'lock_pin': 'قفل پین',
+                    'lock_video': 'قفل ویدیو',
+                    'lock_video_note': 'قفل یادداشت ویدیو',
+                    'lock_audio': 'قفل صدا',
+                    'lock_voice': 'قفل صدا'
+                },
+        }
 }
