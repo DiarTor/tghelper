@@ -1,6 +1,6 @@
 from telebot.types import ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton
 
-from bot.common.control_data import get_filter_data
+from bot.common.control_data import get_settings_data
 
 
 class ButtonGenerator:
@@ -39,5 +39,5 @@ class ButtonGenerator:
 
     def join_channels(self):
         buttons = [[InlineKeyboardButton(text="عضویت در کانال 🔊", url=f"https://t.me/{channel}")] for channel in
-                   get_filter_data("channels_username")]
+                   get_settings_data("channels_username")]
         return self.create_inline_keyboard(buttons)
