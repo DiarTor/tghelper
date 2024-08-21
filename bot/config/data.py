@@ -2,9 +2,9 @@ from bson import ObjectId
 
 from bot.config.database import settings_col
 
-conf_oid = "66bfd1a602804a1672949073"
-locker_oid = "66bfd1a602804a1672949074"
-dynamic_oid = "66bfd1a602804a1672949075"
+conf_oid = "66c659e06a8f9e1d8f497cef"
+locker_oid = "66c659e06a8f9e1d8f497cf0"
+dynamic_oid = "66c659e06a8f9e1d8f497cf1"
 # change the default settings as you need.
 conf = {
     "admins": [1154909190, 1995271332],
@@ -36,13 +36,35 @@ locker = {
     "lock_voice": False,
 
 }
-dynamic = {}
+dynamic = {
+    "force_join":
+        {
+            "active": False,
+            "text": "",
+        },
+    "greeting":
+        {
+            "active": True,
+            "text": ""
+        },
+    "force_add":
+        {
+            "active": False,
+            "text": "",
+            "how_many": 0
+        },
+    "filter_words":
+        {
+            "active": False,
+            "words": []
+        },
+}
 
 if __name__ == "__main__":
     if settings_col.find_one():
         result = settings_col.replace_one({'_id': ObjectId(conf_oid)}, conf)
-        settings_col.replace_one({'_id': ObjectId(locker_oid)}, conf)
-        settings_col.replace_one({'_id': ObjectId(dynamic_oid)}, conf)
+        settings_col.replace_one({'_id': ObjectId(locker_oid)}, locker)
+        settings_col.replace_one({'_id': ObjectId(dynamic_oid)}, dynamic)
         print(f"Matched Results: {result.matched_count} | Modified Results: {result.modified_count}")
     else:
         settings_col.insert_many([conf, locker, dynamic])
