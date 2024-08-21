@@ -3,6 +3,8 @@ import telebot
 from bot.common.buttons import ButtonGenerator
 from bot.common.control_data import get_settings_data, get_response_text, toggle_settings_data, get_all_toggle_settings
 from bot.common.user_manager import is_user_in_channel
+from bot.managers.main.settings import GroupSettings
+from bot.managers.main.start import StartManager
 
 
 class MessageHandler:
@@ -21,8 +23,10 @@ class MessageHandler:
     def handle_callback(callback: telebot.types.CallbackQuery, bot: telebot.TeleBot):
         data = callback.data
         toggle_settings = list(get_all_toggle_settings())
-        if data in toggle_settings:
-            res = toggle_settings_data(data)
-            text = "status.message.active" if res else "status.message.deactivate"
-            text = get_response_text(text)
-            bot.answer_callback_query(callback.id, text, show_alert=True)
+        if data == "toggle_panel":
+            GroupSettings().show_toggle_panel(callback.message, bot)
+        elif data in toggle_settings:
+            toggle_settings_data(data)
+            GroupSettings().show_toggle_panel(callback.message, bot)
+        elif data == "admin_panel":
+            StartManager().return_to_admin_panel(callback.message, bot)

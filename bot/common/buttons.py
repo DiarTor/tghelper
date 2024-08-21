@@ -1,9 +1,14 @@
 from telebot.types import ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton
 
 from bot.common.control_data import get_settings_data
+from bot.config.database import users_col
+from bot.languages import farsi
 
 
 class ButtonGenerator:
+    def __init__(self, user_id):
+        self.user_id = user_id
+
     def create_reply_keyboard(self, buttons):
         """
         Create ReplyKeyboardMarkup from list of buttons
@@ -32,10 +37,40 @@ class ButtonGenerator:
             markup.row(*row)
         return markup
 
+    def save_previous_state(self, state):
+        """
+        Save the state of buttons in the user's document.
+        Convert InlineKeyboardButton objects to dictionaries before saving.
+        """
+        users_col.update_one(
+            {'user_id': self.user_id},
+            {'$set': {'state.buttons': state}},
+            upsert=True
+        )
+
+    def return_button(self):
+        """
+        Create a return button that loads the previous state from the user's document.
+        """
+        user_data = users_col.find_one({'user_id': self.user_id})
+        to = user_data['state']['buttons']
+        return [[InlineKeyboardButton(text='بازگشت', callback_data=to)]]
+
     def admin_panel(self):
-        buttons = [[InlineKeyboardButton(text='عضویت اجباری', callback_data='force_join'),
-                    InlineKeyboardButton(text='خوش آمد گو', callback_data="welcome")]]
+        buttons = [[InlineKeyboardButton(text="مدیریت سویچ ها", callback_data="toggle_panel")]]
         return self.create_inline_keyboard(buttons)
+
+    def lockers_panel(self):
+        buttons = []
+        for key, text in farsi.farsi['translations']['toggle'].items():
+            emoji = '✅' if get_settings_data(key) else '⛔'
+            buttons.append(InlineKeyboardButton(text=f"{emoji} {text}", callback_data=f"{key}"))
+
+        # Group buttons into rows of 2
+        rows = [buttons[i:i + 3] for i in range(0, len(buttons), 3)]
+        self.save_previous_state("admin_panel")
+        rows += self.return_button()
+        return self.create_inline_keyboard(rows)
 
     def join_channels(self):
         buttons = [[InlineKeyboardButton(text="عضویت در کانال 🔊", url=f"https://t.me/{channel}")] for channel in

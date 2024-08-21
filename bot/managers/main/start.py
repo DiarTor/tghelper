@@ -11,6 +11,12 @@ from bot.config.database import users_col
 
 class StartManager:
     @staticmethod
+    def return_to_admin_panel(msg: telebot.types.Message, bot: telebot.TeleBot):
+        bot.edit_message_text(text=get_response_text("welcome.admin", msg.from_user.first_name, msg.from_user.id),
+                              chat_id=msg.chat.id, message_id=msg.message_id,
+                              reply_markup=ButtonGenerator(msg.from_user.id).admin_panel(), parse_mode="markdown")
+
+    @staticmethod
     def insert_user_data(msg: telebot.types.Message):
         context = {
             "user_id": msg.from_user.id,
@@ -18,7 +24,10 @@ class StartManager:
             "first_name": msg.from_user.first_name or None,
             "last_name": msg.from_user.last_name or None,
             "full_name": f"{msg.from_user.first_name or ""} {msg.from_user.last_name or ""}",
-            "datetime": datetime.now().strftime("%Y/%M/%d - %H:%m:%S")
+            "datetime": datetime.now().strftime("%Y/%M/%d - %H:%m:%S"),
+            "state": {
+                "buttons": ""
+            }
         }
         users_col.insert_one(context)
 
@@ -30,7 +39,8 @@ class StartManager:
                 return bot.send_message(chat_id=msg.chat.id,
                                         text=get_response_text("welcome.admin", msg.from_user.first_name,
                                                                msg.from_user.id),
-                                        reply_markup=ButtonGenerator().admin_panel(), parse_mode="markdown")
+                                        reply_markup=ButtonGenerator(msg.from_user.id).admin_panel(),
+                                        parse_mode="markdown")
             return bot.send_message(chat_id=msg.chat.id,
                                     text=get_response_text("welcome.pv", msg.from_user.first_name, msg.from_user.id,
                                                            msg.chat.title),
