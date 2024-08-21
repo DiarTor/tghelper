@@ -1,8 +1,8 @@
 from bson import ObjectId
 
-from bot.config.data import toggle_oid
+from bot.config.data import locker_oid
 from bot.config.database import settings_col
-from bot.languages import farsi
+from bot.languages import english
 
 
 def get_settings_data(name: str = None):
@@ -29,7 +29,7 @@ def get_response_text(address: str, *args):
     :return: The formatted string if the address leads to a string value, otherwise None.
     """
     keys = address.split('.')
-    data = farsi.farsi
+    data = english.english
     for key in keys:
         if not isinstance(data, dict):
             return None
@@ -46,19 +46,19 @@ def get_dict(address: str) -> dict:
     :return: Dict
     """
     keys = address.split('.')
-    data = farsi.farsi
+    data = english.english
     for key in keys:
         data = data.get(key)
     return data
 
 
-def get_all_toggle_settings() -> dict | None:
+def get_all_locker_settings() -> dict | None:
     """
     Retrieves the toggle settings document from the MongoDB collection.
     :return: The toggle settings document as a dictionary if found, otherwise None.
     """
     try:
-        settings_document = settings_col.find_one({'_id': ObjectId(toggle_oid)})
+        settings_document = settings_col.find_one({'_id': ObjectId(locker_oid)})
         if settings_document:
             return settings_document
         print("No toggle settings found.")

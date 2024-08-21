@@ -3,7 +3,7 @@ from bson import ObjectId
 from bot.config.database import settings_col
 
 conf_oid = "66bfd1a602804a1672949073"
-toggle_oid = "66bfd1a602804a1672949074"
+locker_oid = "66bfd1a602804a1672949074"
 dynamic_oid = "66bfd1a602804a1672949075"
 # change the default settings as you need.
 conf = {
@@ -13,10 +13,7 @@ conf = {
     "group_id": -1002200684633,
     "group_username": "DiarDevGp",
 }
-settings = {
-    "force_join": True,
-    "welcome": True,
-    "force_add": False,
+locker = {
     "lock_hashtag": False,
     "lock_username": False,
     "lock_link": False,
@@ -44,8 +41,8 @@ dynamic = {}
 if __name__ == "__main__":
     if settings_col.find_one():
         result = settings_col.replace_one({'_id': ObjectId(conf_oid)}, conf)
-        settings_col.replace_one({'_id': ObjectId(toggle_oid)}, conf)
+        settings_col.replace_one({'_id': ObjectId(locker_oid)}, conf)
         settings_col.replace_one({'_id': ObjectId(dynamic_oid)}, conf)
         print(f"Matched Results: {result.matched_count} | Modified Results: {result.modified_count}")
     else:
-        settings_col.insert_many([conf, settings, dynamic])
+        settings_col.insert_many([conf, locker, dynamic])
