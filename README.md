@@ -48,7 +48,7 @@ We welcome contributions to improve the bot. If you have any suggestions or woul
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the GPL License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
